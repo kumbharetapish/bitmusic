@@ -76,10 +76,20 @@ var getMusicPlayer = (listResponse, i) => {
   var progressBarMain = create("div");
   progressBarMain.className = "progressBarMain";
 
+
   var progressBarChange = create("div");
   progressBarChange.className = "progressBarChange";
   progressBar.append(progressBarMain);
   progressBar.append(progressBarChange);
+  progressBar.addEventListener(
+    "mousedown",
+    function(event) {
+      var clickAt = event.clientX - event.target.offsetLeft;
+      musicTrack.currentTime =
+        (clickAt / event.target.offsetWidth) * musicTrack.duration - 60;
+    },
+    false
+  );
 
   musicPlayerWrapper.append(progressBar);
 
@@ -218,8 +228,6 @@ var getMusicPlayer = (listResponse, i) => {
       pauseBtn.style.display = "flex";
     }
   };
-  
+
   return musicPlayerWrapper;
 };
-
-
